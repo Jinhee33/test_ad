@@ -6,5 +6,5 @@ import retrofit2.http.Query;
 
 public interface RetrofitService {
     @GET("/OrderList")
-    Call<PageListModel> getList(@Query("tableNum") String tableNum);
+    Call<PageListModel> getList(@Query("menuName") String menuName);
 }

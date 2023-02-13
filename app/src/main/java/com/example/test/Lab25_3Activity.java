@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,8 +28,6 @@ import retrofit2.Response;
  */
 public class Lab25_3Activity extends AppCompatActivity {
 
-
-
     RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +39,7 @@ public class Lab25_3Activity extends AppCompatActivity {
 
         //add~~~~~~~~~~~~~~~~
         RetrofitService networkService = RetrofitFactory.create();
-        networkService.getList("101").enqueue(new Callback<PageListModel>() {
+        networkService.getList("부대전골").enqueue(new Callback<PageListModel>() {
             @Override
             public void onResponse(Call<PageListModel> call, Response<PageListModel> response) {
                 if (response.isSuccessful()) {
@@ -65,16 +62,12 @@ public class Lab25_3Activity extends AppCompatActivity {
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
         public TextView itemTitleView;
-        public TextView itemTimeView;
         public TextView itemDescView;
-        public ImageView itemImageView;
 
         public ItemViewHolder(View view) {
             super(view);
             itemTitleView=view.findViewById(R.id.lab3_item_title);
-            itemTimeView=view.findViewById(R.id.lab3_item_time);
             itemDescView=view.findViewById(R.id.lab3_item_desc);
-            itemImageView=view.findViewById(R.id.lab3_item_image);
         }
     }
     class MyAdapter extends RecyclerView.Adapter<ItemViewHolder> {
@@ -100,8 +93,8 @@ public class Lab25_3Activity extends AppCompatActivity {
 
             ItemModel item=articles.get(position);
 
-            String author = item.table_num == null || item.table_num.isEmpty() ? "101" : item.table_num;
-            String titleString =  author+" - "+ item.menu_name;
+            String author = item.menu_name == null || item.menu_name.isEmpty() ? "부대전골" : item.menu_name;
+            String titleString =  author+" - "+ item.table_num;
 
             holder.itemTitleView.setText(titleString);
             holder.itemDescView.setText(item.menu_price);
